@@ -8,7 +8,7 @@ import { PageContainer } from "./components/Page/LoginPage/LoginPage.styles";
 import NavBar from "./components/NavBar";
 
 function App() {
-  const page: string = "HomePage";
+  const page: string = "PostPage";
   return (
     <>
       <Grid container id="app" direction="column" height="100vh" wrap="nowrap">
@@ -25,11 +25,11 @@ function App() {
         >
           {page === "HomePage" && <HomePage />}
           {/* ACT 1 - Render PostPage and CategoriesPage components (Done)*/}
-          {/* ACT 2 - Move the following content to a new component called LoginPage and render it (Done)*/}
-          <PostPage />
-          <CategoriesPage />
-          <LoginPage />
-          {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components */}
+          {/* ACT 2 - Move the following content to a new component called LoginPage and render it (Done) */}
+          {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components (Done) */}
+          {page === "PostPage" && <PostPage />}
+          {page === "CategoriesPage" && <CategoriesPage />}
+          {page === "LoginPage" && <LoginPage />}
         </Grid>
       </Grid>
     </>
