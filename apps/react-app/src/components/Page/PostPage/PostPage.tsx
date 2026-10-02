@@ -14,7 +14,7 @@ const post = {
   title: "Sample Post",
   postID: "98765",
   comments: [
-      {
+    {
       _id: "12365",
       author: "Javier",
       content: "Hola probando",
@@ -32,7 +32,7 @@ const post = {
     },
     {
       _id: "12367",
-      author: "<Jose>",
+      author: "Jose",
       content: "Hola probando x3",
       createdAt: "2025-01-01T00:00:00.000Z",
       updatedAt: "2026-01-01T00:00:00.000Z",

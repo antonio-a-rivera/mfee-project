@@ -5,7 +5,7 @@ import { Container, Content, Author } from "./CommentCard.styles";
 
 // ACT 3 - Receive comment prop (Done)
 function CommentCard(props: { author: string; content: string }) {
-  const {author, content} = props;
+  const { author, content } = props;
   return (
     <Container item sm={8}>
       <AccountCircleIcon />
