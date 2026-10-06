@@ -1,17 +1,19 @@
 import { HomePage } from "./components/Page";
 import NavBar from "./components/NavBar";
 import { PostProvider } from "./context";
-import { Grid } from "@mui/material";
+import { Grid, Snackbar } from "@mui/material";
 
 import CategoriesPage from "./components/Page/CategoriesPage/CategoriesPage";
 import PostPage from "./components/Page/PostPage/PostPage";
 import { LoginPage } from "./components/Page";
 import { PageContainer } from "./components/Page/LoginPage/LoginPage.styles";
+import SnackbarProvider from "./context/SnackbarProvider";
 
 function App() {
-  const page: string = "CategoriesPage";
+  const page: string = "HomePage";
   return (
-    // ACT 7 - Render SnackbarProvider component
+    // ACT 7 - Render SnackbarProvider component (Done) 
+    // Dentro de PostProvider para que pueda ser usado en toda la app
     <PostProvider>
       <>
         <Grid

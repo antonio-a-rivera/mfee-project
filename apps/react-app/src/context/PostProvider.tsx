@@ -1,6 +1,6 @@
 import React, { createContext, useState, useCallback } from "react";
-
 import { Post } from "../types";
+import SnackbarProvider from "./SnackbarProvider";
 
 interface PostContextProps {
   posts: Post[] | null;
@@ -20,8 +20,8 @@ interface PostProviderProps {
 
 export const PostContext = createContext<PostContextProps>({
   posts: [] || null,
-  getPosts: () => {},
-  removePost: () => {},
+  getPosts: () => { },
+  removePost: () => { },
 });
 
 const postList: Post[] = [
@@ -79,8 +79,18 @@ export function PostProvider({
       const newPosts = categoryID ? selectedCategory : serverData;
       setPosts(newPosts);
     },
-    [serverData]
+    [serverData],
   );
+
+  const [message, setMessage] = useState<string>('');
+  const [open, setOpen] = useState<boolean>(false);
+
+  function createAlert() {
+    return (
+      setMessage('Post successfully deleted!'),
+      setOpen(true)
+    );
+  }
 
   const removePost = useCallback(
     ({
@@ -92,7 +102,8 @@ export function PostProvider({
     }) => {
       setServerData((prev) => prev.filter((post: Post) => post.id !== postID));
       getPosts(selectedCategoryID);
-      // ACT 7 - Use createAlert function to notify the user that the item was successfully deleted
+      // ACT 7 - Use createAlert function to notify the user that the item was successfully deleted (Done)
+      createAlert();
     },
     [getPosts]
   );
@@ -105,6 +116,7 @@ export function PostProvider({
         removePost,
       }}
     >
+      <SnackbarProvider message={message} open={open} OnClose={() => setOpen(false)} />
       {children}
     </PostContext.Provider>
   );
