@@ -3,10 +3,15 @@ import NavBar from "./components/NavBar";
 import { PostProvider } from "./context";
 import { Grid } from "@mui/material";
 
+import CategoriesPage from "./components/Page/CategoriesPage/CategoriesPage";
+import PostPage from "./components/Page/PostPage/PostPage";
+import { LoginPage } from "./components/Page";
+import { PageContainer } from "./components/Page/LoginPage/LoginPage.styles";
+
 function App() {
-  const page: string = "HomePage";
+  const page: string = "CategoriesPage";
   return (
-    // ACT 7 - Rneder SnackbarProvider component
+    // ACT 7 - Render SnackbarProvider component
     <PostProvider>
       <>
         <Grid
@@ -28,9 +33,12 @@ function App() {
             }}
           >
             {page === "HomePage" && <HomePage />}
-            {/* ACT 1 - Render PostPage and CategoriesPage components */}
-            {/* ACT 2 - Move the following content to a new component called LoginPage and render it*/}
-            {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components */}
+            {/* ACT 1 - Render PostPage and CategoriesPage components (Done) */}
+            {/* ACT 2 - Move the following content to a new component called LoginPage and render it (Done) */}
+            {/* ACT 4 - Add conditions to render PostPage, LoginPage and CategoriesPage components (Done) */}
+            {page === "PostPage" && <PostPage />}
+            {page === "CategoriesPage" && <CategoriesPage />}
+            {page === "LoginPage" && <LoginPage />}
           </Grid>
         </Grid>
       </>
