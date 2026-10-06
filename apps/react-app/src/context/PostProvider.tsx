@@ -79,7 +79,7 @@ export function PostProvider({
       const newPosts = categoryID ? selectedCategory : serverData;
       setPosts(newPosts);
     },
-    [serverData],
+    [serverData]
   );
 
   const [message, setMessage] = useState<string>('');

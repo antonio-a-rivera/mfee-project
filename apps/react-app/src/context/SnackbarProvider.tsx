@@ -1,4 +1,4 @@
-// ACT 7 - Create SnackbarProvider
+// ACT 7 - Create SnackbarProvider (Done)
 // Obtenido de MUI "Use with Alerts" modificado para la actividad y ser usado con multiples mensajes
 
 import * as React from 'react';
