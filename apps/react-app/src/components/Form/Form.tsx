@@ -81,7 +81,7 @@ const Form = ({ open, post, setOpen, setSelectedPost }: FormProps) => {
     setSelectedPost(null);
   };
 
-  const hanldeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const inputs = Object.values(formData);
@@ -134,7 +134,7 @@ const Form = ({ open, post, setOpen, setSelectedPost }: FormProps) => {
       onClose={handleClose}
       PaperProps={{
         component: "form",
-        onSubmit: hanldeSubmit,
+        onSubmit: handleSubmit,
       }}
     >
       <DialogTitle variant="h5" textAlign="center">

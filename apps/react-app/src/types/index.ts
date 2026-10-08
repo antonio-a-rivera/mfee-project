@@ -10,6 +10,33 @@ export type FormInputs = {
   image: Input;
 };
 
+// Nuevos para Actividad 8
+export type CommentFormInputs = {
+  author: Input;
+  content: Input;
+};
+
+export type newComment = {
+  _id: string;
+  author: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+};
+
+export type CategoryFormInputs = {
+  name: Input;
+};
+
+export type UserFormInputs = {
+  firstname: Input;
+  lastname: Input;
+  username: Input;
+  password: Input;
+}
+//--------------------
+
 export type NewPost = {
   title: string;
   image: string;
@@ -55,6 +82,7 @@ export interface Category {
 }
 
 export interface NewCategory {
+  id: string;
   name: string;
 }
 
@@ -126,9 +154,12 @@ export interface User {
   password: string;
 }
 
+// Modificado para actividad 8
 export interface NewUser extends User {
-  firstame: string;
+  firstname: string;
   lastname: string;
+  username: string;
+  password: string;
 }
 
 export interface AuthResponse {
