@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 
-import axios from "../axios";
+import axiosInstance from "../axios";
 import { AuthResponse, LoginPayload, RegisterPayload } from "../../types";
 
 export const createUser = async ({
@@ -16,14 +16,17 @@ export const createUser = async ({
 }) => {
   onLoading && onLoading(true);
 
-  await axios({
+  await axiosInstance({
     method: "post",
     url: `/auth/register`,
     data: newUser,
   })
     .then((response: AxiosResponse) => {
       const data: AuthResponse = response.data;
-      if (response.status === 201 && onSuccess) onSuccess(data);
+      if (response.status === 201) {
+        if (data.accessToken) localStorage.setItem("apiToken", data.accessToken);
+        onSuccess && onSuccess(data);
+      }
     })
     .catch((error: AxiosError) => {
       console.error(`${error}`);
@@ -40,20 +43,26 @@ export const login = async ({
 }: {
   user: LoginPayload;
   onSuccess?: (data: AuthResponse) => void;
-  onError?: (error: AxiosError) => void;
+  onError?: (error: Error) => void;
   onLoading?: (isLoading: boolean) => void;
 }) => {
   onLoading && onLoading(true);
 
-  await axios({
+  await axiosInstance({
     method: "post",
     url: `/auth/login`,
     data: user,
   })
     .then((response: AxiosResponse) => {
       const data: AuthResponse = response.data;
-      if (response.status === 200 && onSuccess) {
-        onSuccess(data);
+      if (response.status === 200) {
+        if (!data.accessToken) {
+          onError && onError(new Error("Login response did not include an access token"));
+          return;
+        }
+
+        localStorage.setItem("apiToken", data.accessToken);
+        onSuccess && onSuccess(data);
       }
     })
     .catch((error: AxiosError) => {
@@ -74,15 +83,15 @@ export const logout = async ({
 }) => {
   onLoading && onLoading(true);
 
-  await axios({
+  await axiosInstance({
     url: `/auth/logout`,
     method: "post",
   })
     .then((response: AxiosResponse) => {
       const data: AuthResponse = response.data;
-      if (response.status === 200 && onSuccess) {
+      if (response.status === 200) {
         localStorage.removeItem("apiToken");
-        onSuccess(data);
+        onSuccess && onSuccess(data);
       }
     })
     .catch((error: AxiosError) => {
@@ -103,13 +112,16 @@ export const refreshToken = async ({
 }) => {
   onLoading && onLoading(true);
 
-  await axios({
+  await axiosInstance({
     url: `/auth/refresh`,
     method: "post",
   })
     .then((response: AxiosResponse) => {
       const data: AuthResponse = response.data;
-      if (response.status === 200 && onSuccess) onSuccess(data);
+      if (response.status === 200) {
+        if (data.accessToken) localStorage.setItem("apiToken", data.accessToken);
+        onSuccess && onSuccess(data);
+      }
     })
     .catch((error: AxiosError) => {
       console.error(`${error}`);

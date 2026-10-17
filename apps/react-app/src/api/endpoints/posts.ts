@@ -19,7 +19,7 @@ export const getPosts = async ({
     method: 'get'
   })
     .then((response: AxiosResponse) => {
-      const data: Post[] = response.data;
+    const data: Post[] = response.data;
       if (response.status === 200 && onSuccess) onSuccess(data);
     })
     .catch((error: AxiosError) => {
@@ -47,7 +47,7 @@ export const getPostsByCategory = async ({
     method: 'get'
   })
     .then((response: AxiosResponse) => {
-      const data: Post[] = response.data;
+    const data: Post[] = response.data;
       if (response.status === 200 && onSuccess) onSuccess(data);
     })
     .catch((error: AxiosError) => {
@@ -75,7 +75,7 @@ export const getPost = async ({
     method: 'get'
   })
     .then((response: AxiosResponse) => {
-      const data: Post = response.data;
+    const data: Post = response.data;
       if (response.status === 200 && onSuccess) onSuccess(data);
     })
     .catch((error: AxiosError) => {
@@ -125,12 +125,12 @@ export const updatePost = async ({
   onError?: (error: AxiosError) => void;
   onLoading?: (isLoading: boolean) => void;
 }) => {
-  const { id, ...updatedPost } = payload;
+  const { _id, ...updatedPost } = payload;
 
   onLoading && onLoading(true);
 
   await axios({
-    url: `/posts/${id}`,
+    url: `/posts/${_id}`,
     method: 'patch',
     data: updatedPost
   })

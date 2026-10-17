@@ -10,6 +10,33 @@ export type FormInputs = {
   image: Input;
 };
 
+// Nuevos para Actividad 8
+export type CommentFormInputs = {
+  author: Input;
+  content: Input;
+};
+
+export type newComment = {
+  _id: string;
+  author: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+};
+
+export type CategoryFormInputs = {
+  name: Input;
+};
+
+export type UserFormInputs = {
+  firstname: Input;
+  lastname: Input;
+  username: Input;
+  password: Input;
+}
+//--------------------
+
 export interface Alert {
   severity?: "error" | "warning" | "info" | "success";
   message: string;
@@ -22,14 +49,14 @@ export interface TableData {
 }
 
 export interface HeadCell {
-  id: string;
+  _id: string;
   label: string;
 }
 
 export type FormData = { [key: string]: string };
 
 export type Inputs = {
-  id: string;
+  _id: string;
   name: keyof FormInputs;
   label: string;
   type: string;
@@ -40,14 +67,17 @@ export type Inputs = {
 // TypeScript interfaces for BE models
 
 export interface Category {
-  id: string;
+  _id: string;
   name: string;
-  createdAt: string;
-  updatedAt: string;
+}
+
+export interface NewCategory {
+  _id: string;
+  name: string;
 }
 
 export interface Comment {
-  id: string;
+  _id: string;
   author: string;
   content: string;
   post_id: string;
@@ -56,11 +86,11 @@ export interface Comment {
 }
 
 export interface Post {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   description: string;
-  category: string;
+  category: string | Pick<Category, "_id" | "name">;
   comments: Comment[];
   createdAt: string;
   updatedAt: string;
@@ -83,6 +113,7 @@ export interface CreateCategoryPayload {
 }
 
 export interface UpdateCategoryPayload {
+  _id: string;
   name: string;
 }
 
@@ -94,7 +125,7 @@ export interface CreatePostPayload {
 }
 
 export interface UpdatePostPayload {
-  id: string;
+  _id: string;
   title?: string;
   image?: string;
   description?: string;
@@ -102,13 +133,27 @@ export interface UpdatePostPayload {
 }
 
 export interface CreateCommentPayload {
-  id: string;
+  _id: string;
   author: string;
   content: string;
 }
 
+export interface User {
+  username: string;
+  password: string;
+}
+
+// Modificado para actividad 8
+export interface NewUser extends User {
+  firstname: string;
+  lastname: string;
+  username: string;
+  password: string;
+}
+
 // Response types
 export interface AuthResponse {
+  accessToken: string;
   message: string;
 }
 
