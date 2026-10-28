@@ -45,32 +45,34 @@ export default function NavBar(): React.JSX.Element {
           gap: 2,
         }}
       >
-        {/* ACT 10 - Use NavLink to navigate to categories page and change the backgroundcolor when is active */}
-        <Button
-          sx={{
+        {/* ACT 10 - Use NavLink to navigate to categories page and change the backgroundcolor when is active (Done)*/}
+        <NavLink
+          to="/categories"
+          style={({ isActive }) => ({
             textDecoration: "none",
             fontWeight: "bold",
             color: "white",
-            backgroundColor: "#1e8fff",
+            backgroundColor: isActive ? "#004a99" : "#1e8fff",
             borderRadius: "8px",
             padding: "8px",
-          }}
+          })}
         >
           Categories
-        </Button>
-        {/* ACT 10 - Use NavLink to navigate to login page and change the backgroundcolor when is active*/}
-        <Button
-          sx={{
+        </NavLink>
+        {/* ACT 10 - Use NavLink to navigate to login page and change the backgroundcolor when is active (Done)*/}
+        <NavLink
+          to="/login"
+          style={({ isActive }) => ({
             textDecoration: "none",
             fontWeight: "bold",
             color: "white",
-            backgroundColor: "#1e8fff",
+            backgroundColor: isActive ? "#004a99" : "#1e8fff",
             borderRadius: "8px",
             padding: "8px",
-          }}
+          })}
         >
           Login
-        </Button>
+        </NavLink>
       </Box>
     </Grid>
   );

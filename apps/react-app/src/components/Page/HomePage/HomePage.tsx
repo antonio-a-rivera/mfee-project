@@ -30,8 +30,8 @@ function HomePage() {
 
   const handleSelectCategory = useCallback(
     async (category: Category) => {
-      const isCategoryAlreadySelected = category.id === selectedCategory?.id;
-      await getPostList(isCategoryAlreadySelected ? undefined : category.id);
+      const isCategoryAlreadySelected = category._id === selectedCategory?._id;
+      await getPostList(isCategoryAlreadySelected ? undefined : category._id);
       setSelectedCategory(isCategoryAlreadySelected ? null : category);
     },
     [selectedCategory, getPostList]

@@ -125,12 +125,12 @@ export const updatePost = async ({
   onError?: (error: AxiosError) => void;
   onLoading?: (isLoading: boolean) => void;
 }) => {
-  const { id, ...updatedPost } = payload;
+  const { _id, ...updatedPost } = payload;
 
   onLoading && onLoading(true);
 
   await axios({
-    url: `/posts/${id}`,
+    url: `/posts/${_id}`,
     method: "patch",
     data: updatedPost,
   })

@@ -17,19 +17,19 @@ import { FormInputs, Inputs } from "../../types";
 
 const inputs: Inputs = [
   {
-    id: "title-id",
+    _id: "title-id",
     name: "title",
     label: "Title",
     type: "text",
   },
   {
-    id: "description-id",
+    _id: "description-id",
     name: "description",
     label: "Description",
     type: "text",
   },
   {
-    id: "category-label",
+    _id: "category-label",
     name: "category",
     label: "Category",
     type: "menu",
@@ -39,7 +39,7 @@ const inputs: Inputs = [
     ],
   },
   {
-    id: "url-id",
+    _id: "url-id",
     name: "image",
     label: "URL of the image",
     type: "url",
@@ -78,7 +78,13 @@ const Form = ({
     const existingPost = {
       title: { value: post.title, error: "" },
       description: { value: post.description, error: "" },
-      category: { value: post.category ?? "", error: "" },
+      category: {
+        value:
+          typeof post.category === "string"
+            ? post.category
+            : post.category._id,
+        error: "",
+      },
       image: { value: post.image, error: "" },
     };
     setFormData(existingPost);
@@ -108,8 +114,8 @@ const Form = ({
 
     post
       ? await updatePostData({
-          payload: { ...newPost, id: post.id },
-          selectedCategoryID: selectedCategory?.id
+          payload: { ...newPost, _id: post._id },
+          selectedCategoryID: selectedCategory?._id
         })
       : await addPost(newPost);
   };
@@ -158,7 +164,7 @@ const Form = ({
               <TextField
                 required
                 fullWidth
-                id={input.id}
+                id={input._id}
                 name={input.name}
                 label={input.label}
                 type={input.type}
@@ -179,7 +185,7 @@ const Form = ({
                 fullWidth
                 sx={{ pb: 2 }}
                 margin="dense"
-                id={input.id}
+                id={input._id}
                 name={input.name}
                 label={input.label}
                 onChange={handleChange}
@@ -188,7 +194,7 @@ const Form = ({
                 helperText={formData[input.name].error ?? " "}
               >
                 {categories?.map((option, idx) => (
-                  <MenuItem value={option.id ?? option.name} key={idx}>
+                  <MenuItem value={option._id} key={idx}>
                     {option.name}
                   </MenuItem>
                 ))}
