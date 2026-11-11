@@ -14,7 +14,7 @@ app.use(helmet());
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
-  res.send({ message: 'Hello MFEE!' });
+  res.send({ message: 'Hello MFEE! :D' });
 });
 
 app.listen(port, host, () => {
